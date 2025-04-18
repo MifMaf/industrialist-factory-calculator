@@ -1,12 +1,21 @@
 {
-  "name": "vite-react-flow-template",
-  "version": "0.0.0",
+  "name": "industrialist-factory-calculator",
+  "version": "1.0.0",
+  "description": "A node-based factory calculator for the game Industrialist on Roblox.",
+  "author": "Mif_Maf",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/MifMaf/industrialist-factory-calculator"
+  },
+  "homepage": "https://mifmaf.github.io/industrialist-factory-calculator",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@xyflow/react": "^12.5.1",
@@ -23,6 +32,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "gh-pages": "^6.3.0",
     "typescript": "^5.3.3",
     "vite": "^6.3.2"
   }
