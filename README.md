@@ -1,4 +1,4 @@
-# Industrialist Factory Calculator
+# Industrialist Factory Calculator (WIP)
 
 This is a node-based factory calculator for the game
 [Industrialist](https://www.roblox.com/games/9192423027/Industrialist) by Mamytema.
