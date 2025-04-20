@@ -25,9 +25,9 @@ export function numberOption(config: {
   step?: number;
 }): Option<number> {
   return {
+    inputType: "number",
     id: config.id,
     label: config.label,
-    inputType: "number",
     initialValue: config.initialValue,
     attributes: {
       min: config.min,
@@ -44,9 +44,9 @@ export function selectOption<T>(config: {
   options: T[];
 }): Option<T> {
   return {
+    inputType: "select",
     id: config.id,
     label: config.label,
-    inputType: "select",
     initialValue: config.initialValue,
     attributes: {
       options: config.options,
@@ -61,9 +61,9 @@ export function rangeOption(config: {
   values: number[];
 }): Option<number> {
   return {
+    inputType: "range",
     id: config.id,
     label: config.label,
-    inputType: "range",
     initialValue: config.initialValue,
     attributes: {
       values: config.values,

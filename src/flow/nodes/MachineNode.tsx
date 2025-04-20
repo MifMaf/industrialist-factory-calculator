@@ -12,7 +12,7 @@ export function MachineNode({ data }: NodeProps<MachineNode<RecipeId>>) {
       className="react-flow__node-default"
       style={{ backgroundColor: machine.bgColor }}
     >
-      {data.machineCount != null && data.machineCount + "x"} {machine.name}
+      {data.machineCount != null && data.machineCount} {machine.name}
     </div>
   );
 }
