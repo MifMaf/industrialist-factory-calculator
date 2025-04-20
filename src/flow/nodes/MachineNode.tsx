@@ -10,7 +10,7 @@ export function MachineNode({ data }: NodeProps<MachineNode<RecipeId>>) {
   return (
     <div
       className="react-flow__node-default"
-      style={{ backgroundColor: machine.bgColor }}
+      style={{ backgroundColor: machine.bgColor ?? "white" }}
     >
       {data.machineCount != null && data.machineCount} {machine.name}
     </div>

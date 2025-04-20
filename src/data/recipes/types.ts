@@ -14,13 +14,36 @@ export type ResolvedRecipe = {
   environmentals: Partial<Record<EnvironmentalId, number>>;
 };
 
-export type Option<T> = {
-  inputType: "number" | "select" | "range";
+interface BaseOption<Type extends string, T> {
+  inputType: Type;
   id: string;
   label: string;
   initialValue: T;
-  attributes?: Record<string, unknown>;
-};
+}
+
+export interface CheckBoxOption extends BaseOption<"checkbox", boolean> {}
+
+export interface NumberOption extends BaseOption<"number", number> {
+  min: number;
+  max: number;
+  step: number;
+}
+
+export interface SelectOption<Key extends string | number, Mapped>
+  extends BaseOption<"select", Key> {
+  map: Record<Key, Mapped>;
+}
+
+export interface RangeOption<Key extends string | number, Mapped>
+  extends BaseOption<"select", Key> {
+  map: Record<Key, Mapped>;
+}
+
+export type Option =
+  | CheckBoxOption
+  | NumberOption
+  | SelectOption<string | number, unknown>
+  | RangeOption<string | number, unknown>;
 
 export type StaticRecipe = {
   type: "static";
@@ -29,16 +52,15 @@ export type StaticRecipe = {
   resolvedRecipe: ResolvedRecipe;
 };
 
-export type DynamicRecipe<Options extends Record<string, Option<unknown>>> = {
+export type DynamicRecipe<O extends Record<string, Option>> = {
   type: "dynamic";
   id: string;
   machineId: MachineId;
-  options: Options;
-  resolveRecipe: (values: {
-    [K in keyof Options]: Options[K]["initialValue"];
-  }) => ResolvedRecipe;
+  options: O;
+  resolveRecipe(
+    this: DynamicRecipe<O>,
+    values: { [K in keyof O]: O[K]["initialValue"] }
+  ): ResolvedRecipe;
 };
 
-export type Recipe =
-  | StaticRecipe
-  | DynamicRecipe<Record<string, Option<unknown>>>;
+export type Recipe = StaticRecipe | DynamicRecipe<Record<string, Option>>;

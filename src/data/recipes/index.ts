@@ -25,19 +25,18 @@ export const recipeRegistry = createRecipeRegistry({
         id: "steam-temperature",
         label: "Steam Temperature",
         initialValue: 363.63,
-        values: [0, 90.09, 180.18, 270.27, 363.63],
+        map: {
+          0: 30,
+          90.09: 22.5,
+          180.18: 15,
+          270.27: 7.5,
+          363.63: 3,
+        },
       }),
     },
     resolveRecipe(values) {
-      const tempTimeTable: Record<number, number> = {
-        0: 30,
-        90.09: 22.5,
-        180.18: 15,
-        270.27: 7.5,
-        363.63: 3,
-      };
-
-      const time = tempTimeTable[values["steam-temperature"]];
+      const time =
+        this.options["steam-temperature"].map[values["steam-temperature"]];
 
       return {
         inputs: [

@@ -1,72 +1,52 @@
-import { DynamicRecipe, Option, StaticRecipe } from "./types";
-
-export function createRecipeRegistry<T>(recipes: T) {
-  return recipes;
-}
+import {
+  CheckBoxOption,
+  DynamicRecipe,
+  NumberOption,
+  Option,
+  RangeOption,
+  Recipe,
+  SelectOption,
+  StaticRecipe,
+} from "./types";
 
 export function defineStaticRecipe(
-  input: Omit<StaticRecipe, "type">
+  r: Omit<StaticRecipe, "type">
 ): StaticRecipe {
-  return { type: "static", ...input };
+  return { type: "static", ...r };
 }
 
-export function defineDynamicRecipe<
-  Options extends Record<string, Option<unknown>>
->(input: Omit<DynamicRecipe<Options>, "type">): DynamicRecipe<Options> {
-  return { type: "dynamic", ...input };
+export function defineDynamicRecipe<O extends Record<string, Option>>(
+  r: Omit<DynamicRecipe<O>, "type">
+): DynamicRecipe<O> {
+  return { type: "dynamic", ...r };
 }
 
-export function numberOption(config: {
-  id: string;
-  label: string;
-  initialValue: number;
-  min?: number;
-  max?: number;
-  step?: number;
-}): Option<number> {
-  return {
-    inputType: "number",
-    id: config.id,
-    label: config.label,
-    initialValue: config.initialValue,
-    attributes: {
-      min: config.min,
-      max: config.max,
-      step: config.step,
-    },
-  };
+export function createRecipeRegistry<R extends Record<string, Recipe>>(
+  reg: R
+): R {
+  return reg;
 }
 
-export function selectOption<T>(config: {
-  id: string;
-  label: string;
-  initialValue: T;
-  options: T[];
-}): Option<T> {
-  return {
-    inputType: "select",
-    id: config.id,
-    label: config.label,
-    initialValue: config.initialValue,
-    attributes: {
-      options: config.options,
-    },
-  };
+export function checkBoxOption(
+  config: Omit<CheckBoxOption, "inputType">
+): CheckBoxOption {
+  return { inputType: "checkbox", ...config };
 }
 
-export function rangeOption(config: {
-  id: string;
-  label: string;
-  initialValue: number;
-  values: number[];
-}): Option<number> {
-  return {
-    inputType: "range",
-    id: config.id,
-    label: config.label,
-    initialValue: config.initialValue,
-    attributes: {
-      values: config.values,
-    },
-  };
+export function numberOption(
+  config: Omit<NumberOption, "inputType">
+): NumberOption {
+  return { inputType: "number", ...config };
+}
+
+export function selectOption<Key extends string | number, Mapped>(
+  config: Omit<SelectOption<Key, Mapped>, "inputType">
+): SelectOption<Key, Mapped> {
+  return { inputType: "select", ...config };
+}
+
+export function rangeOption<Key extends string | number, Mapped>(
+  config: Omit<RangeOption<Key, Mapped>, "inputType">
+): RangeOption<Key, Mapped> {
+  return { inputType: "select", ...config };
 }
