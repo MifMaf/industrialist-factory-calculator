@@ -1,7 +1,7 @@
 import type { NodeTypes } from "@xyflow/react";
 
-import { PositionLoggerNode } from "./PositionLoggerNode";
 import { AppNode } from "./types";
+import { PositionLoggerNode } from "./PositionLoggerNode";
 import { MachineNode } from "./MachineNode";
 
 export const initialNodes: AppNode[] = [
@@ -23,12 +23,11 @@ export const initialNodes: AppNode[] = [
     id: "e",
     type: "machine-node",
     position: { x: -100, y: -100 },
-    data: { recipeId: "water-pump2" },
+    data: { recipeId: "water-pump2", fixed: false, machineCount: null },
   },
 ];
 
 export const nodeTypes = {
   "position-logger": PositionLoggerNode,
-  // Add any of your custom nodes here!
   "machine-node": MachineNode,
 } satisfies NodeTypes;
