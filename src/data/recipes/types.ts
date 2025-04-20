@@ -11,13 +11,13 @@ export type ResolvedRecipe = {
   inputs: ResourceAmount[];
   outputs: ResourceAmount[];
   time: number;
-  environmentals: Record<EnvironmentalId, number>;
+  environmentals: Partial<Record<EnvironmentalId, number>>;
 };
 
 export type Option<T> = {
+  inputType: "number" | "select" | "range";
   id: string;
   label: string;
-  inputType: "number" | "select" | "range";
   initialValue: T;
   attributes?: Record<string, unknown>;
 };

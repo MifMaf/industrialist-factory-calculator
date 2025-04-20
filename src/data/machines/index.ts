@@ -1,8 +1,13 @@
 import { Machine } from "./types";
 
-export const machineRegistry: Record<string, Machine> = {
-  "oil-rig": { id: "oil-rig", name: "Oil Rig" },
+export const machineRegistry = {
+  "oil-rig": { id: "oil-rig", name: "Oil Rig", bgColor: "darkgrey" },
   "water-pump2": { id: "water-pump2", name: "Water Pump2", bgColor: "aqua" },
-} as const;
+  "steam-cracking-plant": {
+    id: "steam-cracking-plant",
+    name: "Steam Cracking Plant",
+    bgColor: "white",
+  },
+} as const satisfies Record<string, Machine>;
 
 export type MachineId = keyof typeof machineRegistry;

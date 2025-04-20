@@ -1,6 +1,6 @@
 import { Resource } from "./types";
 
-export const resourceRegistry: Record<string, Resource> = {
+export const resourceRegistry = {
   "crude-oil": {
     id: "crude-oil",
     name: "Crude Oil",
@@ -41,16 +41,7 @@ export const resourceRegistry: Record<string, Resource> = {
     name: "Steam",
     category: "fluid",
   },
-  power: {
-    id: "power",
-    name: "power",
-    category: "power",
-  },
-  pollution: {
-    id: "pollution",
-    name: "Pollution",
-    category: "pollution",
-  },
-} as const;
+  paraxylene: { id: "paraxylene", name: "Paraxylene", category: "fluid" },
+} as const satisfies Record<string, Resource>;
 
 export type ResourceId = keyof typeof resourceRegistry;

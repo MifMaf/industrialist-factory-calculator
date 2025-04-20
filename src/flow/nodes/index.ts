@@ -23,7 +23,11 @@ export const initialNodes: AppNode[] = [
     id: "e",
     type: "machine-node",
     position: { x: -100, y: -100 },
-    data: { recipeId: "water-pump2", fixed: false, machineCount: null },
+    data: {
+      recipeId: "steam-cracking-plant-1",
+      fixed: false,
+      machineCount: null,
+    },
   },
 ];
 
