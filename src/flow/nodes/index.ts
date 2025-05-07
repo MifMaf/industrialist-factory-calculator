@@ -2,7 +2,7 @@ import type { NodeTypes } from "@xyflow/react";
 
 import { AppNode } from "./types";
 import { PositionLoggerNode } from "./PositionLoggerNode";
-import { MachineNode } from "./MachineNode";
+import { RecipeNode } from "./RecipeNode";
 
 export const initialNodes: AppNode[] = [
   { id: "a", type: "input", position: { x: 0, y: 0 }, data: { label: "wire" } },
@@ -21,7 +21,7 @@ export const initialNodes: AppNode[] = [
   },
   {
     id: "e",
-    type: "machine-node",
+    type: "recipe-node",
     position: { x: -100, y: -100 },
     data: {
       recipeId: "steam-cracking-plant-1",
@@ -33,5 +33,5 @@ export const initialNodes: AppNode[] = [
 
 export const nodeTypes = {
   "position-logger": PositionLoggerNode,
-  "machine-node": MachineNode,
+  "recipe-node": RecipeNode,
 } satisfies NodeTypes;
