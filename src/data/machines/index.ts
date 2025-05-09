@@ -8,6 +8,11 @@ export const machineRegistry = {
     name: "Steam Cracking Plant",
     bgColor: "white",
   },
+  "mineshaft-drill": {
+    id: "mineshaft-drill",
+    name: "Mineshaft Drill",
+    bgColor: "gray",
+  },
 } as const satisfies Record<string, Machine>;
 
 export type MachineId = keyof typeof machineRegistry;
