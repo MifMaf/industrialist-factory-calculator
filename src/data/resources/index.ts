@@ -1,3 +1,4 @@
+import { DeepReadOnly } from "../types";
 import { Resource } from "./types";
 
 export const resourceRegistry = {
@@ -105,6 +106,6 @@ export const resourceRegistry = {
     category: "fluid",
   },
   "machine-oil": { id: "machine-oil", name: "Machine Oil", category: "fluid" },
-} as const satisfies Record<string, Resource>;
+} as const satisfies DeepReadOnly<Record<string, Resource>>;
 
 export type ResourceId = keyof typeof resourceRegistry;

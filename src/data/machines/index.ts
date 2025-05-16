@@ -1,3 +1,4 @@
+import { DeepReadOnly } from "../types";
 import { Machine } from "./types";
 
 export const machineRegistry = {
@@ -13,6 +14,6 @@ export const machineRegistry = {
     name: "Mineshaft Drill",
     bgColor: "gray",
   },
-} as const satisfies Record<string, Machine>;
+} as const satisfies DeepReadOnly<Record<string, Machine>>;
 
 export type MachineId = keyof typeof machineRegistry;

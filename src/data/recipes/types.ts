@@ -11,11 +11,11 @@ export type ResolvedRecipe = {
   inputs: ResourceAmount[];
   outputs: ResourceAmount[];
   time: number;
-  environmentals: Partial<Record<EnvironmentalId, number>>;
+  environmentals: Record<EnvironmentalId, number>;
 };
 
-interface BaseOption<Type extends string, T> {
-  inputType: Type;
+interface BaseOption<OptionType extends string, T> {
+  inputType: OptionType;
   id: string;
   label: string;
   initialValue: T;
@@ -26,7 +26,7 @@ export interface CheckBoxOption extends BaseOption<"checkbox", boolean> {}
 export interface NumberOption extends BaseOption<"number", number> {
   min: number;
   max: number;
-  step: number;
+  snapToNumber(number: number): number;
 }
 
 export interface SelectOption<Key extends string | number, Mapped>
@@ -52,14 +52,14 @@ export type StaticRecipe = {
   resolvedRecipe: ResolvedRecipe;
 };
 
-export type DynamicRecipe<O extends Record<string, Option>> = {
+export type DynamicRecipe<Options extends Record<string, Option>> = {
   type: "dynamic";
   id: string;
   machineId: MachineId;
-  options: O;
+  options: Options;
   resolveRecipe(
-    this: DynamicRecipe<O>,
-    values: { [K in keyof O]: O[K]["initialValue"] }
+    this: DynamicRecipe<Options>,
+    values: { [K in keyof Options]: Options[K]["initialValue"] }
   ): ResolvedRecipe;
 };
 
