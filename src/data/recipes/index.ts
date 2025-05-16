@@ -97,7 +97,7 @@ export const recipeRegistry = createRecipeRegistry({
         label: "Acid",
         initialValue: "None",
         map: {
-          None: { id: null, rate: 0, getMulti: (d: number) => d ** 2 / 900e3 },
+          None: { id: null, rate: 0, getMulti: (d) => d ** 2 / 900e3 },
           Water: {
             id: "water",
             rate: 10,
@@ -346,8 +346,8 @@ export const recipeRegistry = createRecipeRegistry({
 
       const durabilityRate =
         0.5 *
-        drillHead.getMulti(values.depth) *
-        acid.getMulti(values.depth) *
+        drillHead.getMulti(values.depth === 100 ? 300 : values.depth) *
+        acid.getMulti(values.depth === 100 ? 300 : values.depth) *
         (machineOil ? 1.1 : 1);
 
       const replacementTime = 12;
@@ -367,7 +367,7 @@ export const recipeRegistry = createRecipeRegistry({
         });
 
       const outputs = this.options.depth.map[values.depth].map((ra) => {
-        ra.amount *= drillTime;
+        ra.amount *= drillTime * (machineOil ? 1.1 : 1);
         return ra;
       });
 
