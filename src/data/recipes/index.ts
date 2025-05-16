@@ -17,7 +17,7 @@ export const recipeRegistry = createRecipeRegistry({
       inputs: [],
       outputs: [{ resourceId: "water", amount: 36 }],
       time: 6,
-      environmentals: { power: -700 },
+      environmentals: { power: -700, pollution: 0 },
     },
   }),
   "steam-cracking-plant-1": defineDynamicRecipe({
@@ -366,8 +366,10 @@ export const recipeRegistry = createRecipeRegistry({
         });
 
       const outputs = this.options.depth.map[values.depth].map((ra) => {
-        ra.amount *= drillTime * (machineOil ? 1.1 : 1);
-        return ra;
+        return {
+          ...ra,
+          amount: ra.amount * drillTime * (machineOil ? 1.1 : 1),
+        };
       });
 
       return {
