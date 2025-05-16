@@ -38,9 +38,6 @@ export const recipeRegistry = createRecipeRegistry({
       }),
     },
     resolveRecipe(values) {
-      const time =
-        this.options["steam-temperature"].map[values["steam-temperature"]];
-
       return {
         inputs: [
           { resourceId: "crude-oil", amount: 2 },
@@ -50,7 +47,9 @@ export const recipeRegistry = createRecipeRegistry({
           { resourceId: "paraxylene", amount: 2 },
           { resourceId: "ethylene", amount: 3 },
         ],
-        time: time,
+        time: this.options["steam-temperature"].map[
+          values["steam-temperature"]
+        ],
         environmentals: { power: -60e3, pollution: 0.432 },
       };
     },
@@ -386,7 +385,7 @@ export const recipeRegistry = createRecipeRegistry({
 
 export type RecipeId = keyof typeof recipeRegistry;
 
-export type RecipeOptionValue<T extends RecipeId> =
-  (typeof recipeRegistry)[T] extends DynamicRecipe<infer Options>
+export type RecipeOptionValues<Id extends RecipeId> =
+  (typeof recipeRegistry)[Id] extends DynamicRecipe<infer Options>
     ? { [K in keyof Options]: Options[K]["initialValue"] }
-    : never;
+    : null;

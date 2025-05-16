@@ -1,6 +1,6 @@
 import type { NodeTypes } from "@xyflow/react";
 
-import { AppNode } from "./types";
+import { type AppNode } from "./types";
 import { PositionLoggerNode } from "./PositionLoggerNode";
 import { RecipeNode } from "./RecipeNode";
 
@@ -25,7 +25,7 @@ export const initialNodes: AppNode[] = [
     position: { x: -100, y: -100 },
     data: {
       recipeId: "steam-cracking-plant-1",
-      fixed: false,
+      optionValues: { "steam-temperature": 1 },
       machineCount: null,
     },
   },
